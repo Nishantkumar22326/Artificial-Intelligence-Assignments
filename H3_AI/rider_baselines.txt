@@ -1,0 +1,27 @@
+=== Instance 1 ===
+Fuel-optimal solution:
+  Total fuel: 9
+    R1: distance=9, orders=['O1', 'O2', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('P', 'O2'), ('D', 'O3'), ('D', 'O1'), ('D', 'O2')]
+    R2: distance=0, orders=[], sequence=[]
+Time-optimal solution:
+  Elapsed time: 7
+    R1: distance=7, orders=['O1', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('D', 'O3'), ('D', 'O1')]
+    R2: distance=7, orders=['O2'], sequence=[('P', 'O2'), ('D', 'O2')]
+
+=== Instance 2 ===
+Fuel-optimal solution:
+  Total fuel: 9
+    R1: distance=9, orders=['O1', 'O2', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('P', 'O2'), ('D', 'O3'), ('D', 'O2'), ('D', 'O1')]
+    R2: distance=0, orders=[], sequence=[]
+Time-optimal solution:
+  Elapsed time: 9
+    R1: distance=9, orders=['O1', 'O2', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('P', 'O2'), ('D', 'O3'), ('D', 'O2'), ('D', 'O1')]
+    R2: distance=0, orders=[], sequence=[]
+
+=== Instance 3 ===
+Fuel-optimal solution:
+  Total fuel: 11
+    R1: distance=11, orders=['O1', 'O2', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('P', 'O2'), ('D', 'O3'), ('D', 'O1'), ('D', 'O2')]
+Time-optimal solution:
+  Elapsed time: 11
+    R1: distance=11, orders=['O1', 'O2', 'O3'], sequence=[('P', 'O3'), ('P', 'O1'), ('P', 'O2'), ('D', 'O3'), ('D', 'O1'), ('D', 'O2')]

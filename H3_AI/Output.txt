@@ -1,0 +1,43 @@
+Ground truth (via exhaustive search over all allocations and valid pickup/drop sequences):
+
+- Fuel-optimal:
+  * Allocation: R1 takes O1, O2, O3; R2 takes none.
+  * Path (R1): A (pO3) → B (pO1) → C (pO2) → D (dO3) → E (dO1) → F (dO2)
+  * Distances: 0 + 2 + 1 + 2 + 2 + 2 = 9
+  * Total fuel = 9, makespan = 9.
+
+- Time-optimal:
+  * Allocation: R1 takes O1, O3; R2 takes O2.
+  * R1 path: A (pO3) → B (pO1) → D (dO3) → E (dO1), distance = 7
+  * R2 path: D → C (pO2) → F (dO2), distance = 7
+  * Makespan = 7, total fuel = 14.
+
+LLM comparison on Instance 1:
+
+- ChatGPT (free):
+  * Fuel case: correct allocation and cost (R1 all 3, total fuel 9).
+  * Time case: correct allocation and cost (split 7–7, makespan 7).
+
+- Claude (free):
+  * Fuel case: suboptimal (reports total fuel 14 with R1: O3 only, R2: O1,O2).
+  * Time case: suboptimal (uses allocation with makespan 8, misses 7–7 solution).
+
+- Gemini (free):
+  * Fuel case: suboptimal; treats the 7+7 split (total 14) as fuel-optimal, even though a 9-cost solution exists.
+  * Time case: correct (allocation and makespan 7).
+  * Also incorrectly claims that the same allocation minimises both fuel and time.
+
+
+
+### Rider–Order Allocation – Instance 1 (Class Example)
+
+| Objective        | Method        | Allocation (R1 / R2)                            | R1 Distance | R2 Distance | Total Fuel | Makespan | Correct wrt Ground Truth?      | Notes / Error Type                                      |
+|------------------|--------------|-----------------------------------------------|------------:|------------:|-----------:|---------:|---------------------------------|--------------------------------------------------------|
+| Fuel minimising  | Ground truth | R1: O1, O2, O3;  R2: none                     |          9  |          0  |        9   |    9     | – (reference)                  | R1 does all orders in one sweep, globally optimal fuel |
+| Time minimising  | Ground truth | R1: O1, O3;  R2: O2                            |          7  |          7  |       14   |    7     | – (reference)                  | Perfectly balanced, minimal possible makespan          |
+| Fuel minimising  | ChatGPT      | R1: O1, O2, O3;  R2: none                     |          9  |          0  |        9   |    9     | ✅ Correct                     | Matches optimal allocation + cost exactly              |
+| Time minimising  | ChatGPT      | R1: O1, O3;  R2: O2                            |          7  |          7  |       14   |    7     | ✅ Correct                     | Matches optimal balanced 7–7 schedule                  |
+| Fuel minimising  | Claude       | R1: O3;  R2: O1, O2                            |          5  |          9  |       14   |    9     | ❌ Incorrect (suboptimal)      | Misses cheaper 9-cost plan, stops at 14                |
+| Time minimising  | Claude       | R1: O2, O3;  R2: O1                            |          8  |          7  |       15   |    8     | ❌ Incorrect (suboptimal)      | Misses 7–7 plan, reports makespan 8                    |
+| Fuel minimising  | Gemini       | R1: O1, O3;  R2: O2                            |          7  |          7  |       14   |    7     | ❌ Fuel: Incorrect (suboptimal) | Uses time-optimal allocation but calls it fuel-optimal |
+| Time minimising  | Gemini       | R1: O1, O3;  R2: O2                            |          7  |          7  |       14   |    7     | ✅ Time: Correct               | Correct makespan 7, but confuses fuel vs time          |

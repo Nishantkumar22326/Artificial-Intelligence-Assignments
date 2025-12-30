@@ -1,0 +1,163 @@
+Rider–Order Allocation – Instance 1 (Scenario Setup)
+Road network
+
+We have six locations connected by roads with the following distances (undirected graph):
+
+A–B: 2
+
+A–C: 4
+
+B–C: 1
+
+C–D: 2
+
+C–E: 3
+
+D–F: 3
+
+D–E: 2
+
+E–F: 2
+
+All edges are bidirectional and distances are symmetric.
+
+Riders
+
+Rider R1 starts at location A.
+
+Rider R2 starts at location D.
+
+Both riders:
+
+Travel at the same constant speed.
+
+Can carry multiple orders at the same time (no capacity limit assumed).
+
+Orders
+
+There are three delivery orders:
+
+Order O1: pickup at B, deliver to E (B → E)
+
+Order O2: pickup at C, deliver to F (C → F)
+
+Order O3: pickup at A, deliver to D (A → D)
+
+Each order must satisfy:
+
+The rider must visit the pickup location before the corresponding drop-off location.
+
+Once an order is delivered, it is completed and does not need to be revisited.
+
+Assumptions
+
+The graph is static; road distances do not change over time.
+
+Both riders can plan arbitrary routes through the graph (not restricted to simple paths).
+
+Riders may carry multiple active orders simultaneously (no capacity constraint).
+
+We ignore loading/unloading times; time is proportional only to total distance travelled.
+
+Riders do not need to return to any depot after completing all assigned orders.
+
+Optimization questions (for the LLM)
+
+For this instance, we ask the LLM to find:
+
+Fuel minimisation:
+
+Allocation of O1, O2, O3 to R1 and R2, and routes for each rider
+
+Such that the total distance travelled by both riders combined is minimised.
+
+Time minimisation:
+
+Allocation and routes such that the elapsed time until all three orders are delivered is minimised.
+
+Here, time = max(distance travelled by R1, distance travelled by R2) (makespan).
+
+Rider–Order Allocation – Instance 2 (Scenario Setup)
+Road network
+
+We use the same road network as in Instance 1 (same graph and distances):
+
+A–B: 2
+
+A–C: 4
+
+B–C: 1
+
+C–D: 2
+
+C–E: 3
+
+D–F: 3
+
+D–E: 2
+
+E–F: 2
+
+Undirected, symmetric distances.
+
+Riders
+
+Riders and starts are unchanged:
+
+Rider R1 starts at A.
+
+Rider R2 starts at D.
+
+Same assumptions as before:
+
+Equal constant speed.
+
+Can carry multiple orders simultaneously.
+
+Orders
+
+In Instance 2 we change only the orders, keeping the graph and rider start positions the same.
+
+There are three new orders:
+
+Order O1: pickup at A, deliver to F (A → F)
+
+Order O2: pickup at B, deliver to D (B → D)
+
+Order O3: pickup at C, deliver to E (C → E)
+
+Constraints:
+
+For each order, pickup location must be visited before its drop-off location.
+
+After delivery, the order is considered complete.
+
+Assumptions
+
+Same as Instance 1:
+
+Static, undirected graph with fixed distances.
+
+Riders may follow any path in the graph.
+
+Multiple orders can be carried at the same time (no capacity limit).
+
+Only travel distance matters (no separate loading/unloading time).
+
+No requirement to return to a depot after finishing.
+
+Optimization questions (for the LLM)
+
+For this second instance, we again ask the LLM to solve:
+
+Fuel minimisation:
+
+Find an allocation of the three orders to R1 and R2 and corresponding routes
+
+To minimise the total distance travelled (R1 distance + R2 distance).
+
+Time minimisation:
+
+Find allocation and routes that minimise the completion time of all orders,
+
+Where completion time (makespan) is max(distance of R1, distance of R2).
